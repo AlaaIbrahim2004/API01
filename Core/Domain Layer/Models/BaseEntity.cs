@@ -1,0 +1,7 @@
+﻿namespace Domain_Layer.Models
+{
+    public class BaseEntity<TKey>
+    {
+        public TKey Id { get; set; }
+    }
+}
