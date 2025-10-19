@@ -30,7 +30,7 @@ namespace Services.Spcefications
                 default:
                     break;
             }
-
+            ApplyPagination(queryParams.PageSize, queryParams.PageIndex);
         }
 
         //Get By Id

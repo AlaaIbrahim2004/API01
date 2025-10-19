@@ -25,6 +25,12 @@ namespace Presistance
                 query = query.OrderByDescending(specification.OrderByDescending);
             }
 
+            if (specification.IsPaginated)
+            {
+                query = query.Skip(specification.Skip);
+                query = query.Take(specification.Take);
+            }
+
             if (specification.IncludeExpressions is not null && specification.IncludeExpressions.Any())
             {
 
