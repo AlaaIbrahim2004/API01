@@ -31,5 +31,16 @@ namespace Presistance.Repositories
         {
             _dbContext.Set<TEntity>().Update(entity);
         }
+        public async Task<IEnumerable<TEntity>> GetAllAsync(ISpecification<TEntity, TKey> specification)
+        {
+            return await SpecifiactionEvaluator.CreateQuery(_dbContext.Set<TEntity>(), specification).ToListAsync();
+        }
+
+
+        public async Task<TEntity?> GetByIdAsync(ISpecification<TEntity, TKey> specification)
+        {
+            return await SpecifiactionEvaluator.CreateQuery(_dbContext.Set<TEntity>(), specification).FirstOrDefaultAsync();
+
+        }
     }
 }
