@@ -1,4 +1,5 @@
 using Domain_Layer.Contracts;
+using E_Commerce.Web.CustomMiddleWares;
 using Microsoft.EntityFrameworkCore;
 using Presistance;
 using Presistance.Data.Contexts;
@@ -46,6 +47,14 @@ namespace E_Commerce.Web
             #region Configer http request pipeline
 
             // Configure the HTTP request pipeline.
+            //////app.Use(async (RequestContext, NextMiddleWare) =>
+            //////{
+            //////    Console.WriteLine("Request Under Processing");
+            //////    await NextMiddleWare.Invoke();
+            //////    Console.WriteLine("Waiting Response");
+            //////    Console.WriteLine(RequestContext.Response.Body);
+            //////});
+            app.UseMiddleware<CustomExceptionHandlerMiddleWare>();
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
@@ -61,6 +70,7 @@ namespace E_Commerce.Web
             #endregion
 
             app.Run();
+
         }
     }
 }
