@@ -1,4 +1,4 @@
-﻿using Domain_Layer.Models;
+﻿using Domain_Layer.Models.ProductModule;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 

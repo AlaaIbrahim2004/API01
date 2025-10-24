@@ -1,5 +1,5 @@
 ﻿using Domain_Layer.Contracts;
-using Domain_Layer.Models;
+using Domain_Layer.Models.ProductModule;
 using Microsoft.EntityFrameworkCore;
 using Presistance.Data.Contexts;
 using System.Text.Json;

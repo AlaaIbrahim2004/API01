@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Domain_Layer.Models;
+using Domain_Layer.Models.ProductModule;
 using Shared.DTO;
 
 namespace Services.MappingProfiles
