@@ -1,4 +1,4 @@
-﻿namespace Shared.DTO
+﻿namespace Shared.DTO.ProductModule
 {
     public class ProductDto
     {

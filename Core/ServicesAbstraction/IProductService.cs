@@ -1,5 +1,5 @@
 ﻿using Shared;
-using Shared.DTO;
+using Shared.DTO.ProductModule;
 
 namespace ServicesAbstraction
 {

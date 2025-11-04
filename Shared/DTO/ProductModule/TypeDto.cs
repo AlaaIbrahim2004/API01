@@ -1,9 +1,8 @@
-﻿namespace Shared.DTO
+﻿namespace Shared.DTO.ProductModule
 {
-    public class BrandDto
+    public class TypeDto
     {
         public int Id { get; set; }
         public string Name { get; set; } = null!;
-
     }
 }

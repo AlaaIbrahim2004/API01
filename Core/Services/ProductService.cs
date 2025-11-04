@@ -5,7 +5,7 @@ using Domain_Layer.Models.ProductModule;
 using Services.Spcefications;
 using ServicesAbstraction;
 using Shared;
-using Shared.DTO;
+using Shared.DTO.ProductModule;
 
 namespace Services
 {

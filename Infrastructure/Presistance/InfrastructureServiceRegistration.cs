@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Presistance.Data.Contexts;
 using Presistance.Repositories;
+using StackExchange.Redis;
 
 namespace Presistance
 {
@@ -17,6 +18,12 @@ namespace Presistance
             });
             Services.AddScoped<IDataSeeding, DataSeeding>();
             Services.AddScoped<IUnitOfWork, UnitOfWork>();
+            Services.AddScoped<IBasketRepository, BasketRepository>();
+            Services.AddSingleton<IConnectionMultiplexer>((_) =>
+            {
+                return ConnectionMultiplexer.Connect(Configuration.GetConnectionString("RedisConnection"));
+
+            });
             return Services;
         }
     }
