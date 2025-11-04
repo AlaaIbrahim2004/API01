@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Presistance.Data.Contexts;
+using Presistance.Identity;
 using Presistance.Repositories;
 using StackExchange.Redis;
 
@@ -23,6 +24,10 @@ namespace Presistance
             {
                 return ConnectionMultiplexer.Connect(Configuration.GetConnectionString("RedisConnection"));
 
+            });
+            Services.AddDbContext<StoreIdentityDbContext>(options =>
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("IdentityConnection"));
             });
             return Services;
         }
