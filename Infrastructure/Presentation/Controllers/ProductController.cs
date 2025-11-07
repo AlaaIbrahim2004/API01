@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ServicesAbstraction;
 using Shared;
 using Shared.DTO.ProductModule;
@@ -11,6 +12,7 @@ namespace Presentation.Controllers
     {
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<PaginationResult<ProductDto>>> GetAllProducts([FromQuery] ProductQueryParams queryParams)
         {
             var products = await _serviceManager.ProductService.GetAllProductsAsync(queryParams);
