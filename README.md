@@ -1,10 +1,13 @@
+<p align="center">
+  <img src="e-commerce.png" alt="Masaaq Swagger UI" width="800">
+</p>
 # 🛒 E-Commerce RESTful API
 
 > **🎓 Route IT Training Center - Backend (.NET Core) Diploma Project**
 > *A highly scalable and robust backend API built with a focus on clean code principles, performance, and modern software architecture.*
 
 ## 🌐 Live Demo
-**🌍 Live API Base URL:** [http://e-commerce01.runasp.net/swagger/index.html]
+**🌍 Live API Base URL:** [Swagger UI (ASP.NET Monster)](http://e-commerce01.runasp.net/swagger/index.html)
 *(To explore the endpoints, append `/swagger` to the base URL)*
 
 ## 📝 Project Overview
