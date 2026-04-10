@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="e-commerce.png" alt="Masaaq Swagger UI" width="800">
+  <img src="e-commerce .png" alt="Masaaq Swagger UI" width="800">
 </p>
 # 🛒 E-Commerce RESTful API
 
