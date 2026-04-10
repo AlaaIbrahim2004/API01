@@ -1,56 +1,91 @@
-using Domain_Layer.Contracts;
-using Microsoft.EntityFrameworkCore;
+using E_Commerce.Web.Exctentions;
 using Presistance;
-using Presistance.Data.Contexts;
+using Services;
 namespace E_Commerce.Web
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
             #region Services to the container
             // Add services to the container.
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-            builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
-            builder.Services.AddDbContext<StoreDbContext>(options =>
+            #region Add Authorization to Swagger
+
+            builder.Services.AddSwaggerGen(options =>
             {
-                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+                options.SwaggerDoc("v1", new() { Title = "E-Commerce API", Version = "v1" });
+
+                options.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme
+                {
+                    Name = "Authorization",
+                    Type = Microsoft.OpenApi.Models.SecuritySchemeType.Http,
+                    Scheme = "Bearer",
+                    BearerFormat = "JWT",
+                    In = Microsoft.OpenApi.Models.ParameterLocation.Header,
+                    Description = "Enter JWT token like: Bearer {your token here}"
+                });
+
+                options.AddSecurityRequirement(new Microsoft.OpenApi.Models.OpenApiSecurityRequirement
+                {
+                    {
+                        new Microsoft.OpenApi.Models.OpenApiSecurityScheme
+                        {
+                            Reference = new Microsoft.OpenApi.Models.OpenApiReference
+                            {
+                                Type = Microsoft.OpenApi.Models.ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            }
+                        },
+                        new string[] {}
+                    }
+                });
             });
-            builder.Services.AddScoped<IDataSeeding, DataSeeding>();
+            #endregion
+            builder.Services.AddInfrastructureService(builder.Configuration);
+            builder.Services.AddApplicationServices();
+            builder.Services.AddWebApplicationServices();
+            builder.Services.AddJWTServices(builder.Configuration);
             #endregion
 
             #region Data Seeding
 
             var app = builder.Build();
-
-            var Scope = app.Services.CreateScope();
-
-            var seed = Scope.ServiceProvider.GetRequiredService<IDataSeeding>();
-
-            seed.DataSeed();
+            await app.SeedDatAsynca();
             #endregion
 
             #region Configer http request pipeline
 
             // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
-            {
-                app.UseSwagger();
-                app.UseSwaggerUI();
-            }
+            //////app.Use(async (RequestContext, NextMiddleWare) =>
+            //////{
+            //////    Console.WriteLine("Request Under Processing");
+            //////    await NextMiddleWare.Invoke();
+            //////    Console.WriteLine("Waiting Response");
+            //////    Console.WriteLine(RequestContext.Response.Body);
+            //////});
 
+            app.UseCustomExceptionMiddleWare();
+            //if (app.Environment.IsDevelopment())
+            //{
+            //    app.UseSwaggerMiddleWare();
+            //}
+            app.UseSwaggerMiddleWare();
             app.UseHttpsRedirection();
 
-            //app.UseAuthorization();
+            app.UseStaticFiles();
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.MapControllers();
             #endregion
 
             app.Run();
+
         }
     }
 }

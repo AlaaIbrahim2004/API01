@@ -1,6 +1,5 @@
-﻿using Domain_Layer.Models;
+﻿using Domain_Layer.Models.ProductModule;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection;
 
 namespace Presistance.Data.Contexts
 {
@@ -15,8 +14,8 @@ namespace Presistance.Data.Contexts
         public DbSet<ProductType> ProductTypes { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
-            //modelBuilder.ApplyConfigurationsFromAssembly(typeof(AssemblyReference).Assembly);
+            //modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(AssemblyReference).Assembly);
 
         }
     }
