@@ -18,7 +18,7 @@ namespace E_Commerce.Web
 
             builder.Services.AddSwaggerGen(options =>
             {
-                options.SwaggerDoc("v1", new() { Title = "Masaq API", Version = "v1" });
+                options.SwaggerDoc("v1", new() { Title = "E-Commerce API", Version = "v1" });
 
                 options.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme
                 {
@@ -70,11 +70,11 @@ namespace E_Commerce.Web
             //////});
 
             app.UseCustomExceptionMiddleWare();
-            if (app.Environment.IsDevelopment())
-            {
-                app.UseSwaggerMiddleWare();
-            }
-
+            //if (app.Environment.IsDevelopment())
+            //{
+            //    app.UseSwaggerMiddleWare();
+            //}
+            app.UseSwaggerMiddleWare();
             app.UseHttpsRedirection();
 
             app.UseStaticFiles();
