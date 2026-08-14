@@ -46,6 +46,7 @@ namespace E_Commerce.Web
                 });
             });
             #endregion
+
             builder.Services.AddInfrastructureService(builder.Configuration);
             builder.Services.AddApplicationServices();
             builder.Services.AddWebApplicationServices();

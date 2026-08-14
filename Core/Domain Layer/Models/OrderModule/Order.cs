@@ -1,5 +1,6 @@
 ﻿namespace Domain_Layer.Models.OrderModule
 {
+    //Domain-Driven Design (Aggregate Root)
     public class Order : BaseEntity<Guid>
     {
         public Order()

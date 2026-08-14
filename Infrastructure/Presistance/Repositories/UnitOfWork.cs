@@ -6,6 +6,8 @@ namespace Presistance.Repositories
 {
     public class UnitOfWork(StoreDbContext _dbContext) : IUnitOfWork
     {
+        //Generic Unit of Work with On-The-Fly Repository Creation.
+
         private readonly Dictionary<string, object> _repositories = new Dictionary<string, object>();
         public IGenericRepository<TEntity, TKey> GetRepository<TEntity, TKey>() where TEntity : BaseEntity<TKey>
         {
